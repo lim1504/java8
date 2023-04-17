@@ -22,9 +22,9 @@ import java.util.function.Consumer;
  *  1. 자바 Collection 을 활용해, 람다식 구현
  *      - 의문점
  *          1. 단일 추상메소드를 가지고 있어야하는 - 함수형인터페이스의 조건
- *             ? : forEach 내부의 매개변수로 Consumer를 포함하고 있는데,
- *                 Consumer interface 내부에는 accept와 andThen이 구현되어 있었음
- *                 그렇다면 Consumer는 단일 추상 메소드를 구현하고 있는 인터페이스에 위배되지않나?
+ *             ? : forEach 내부의 매개변수로 Consumer 를 포함하고 있는데,
+ *                 Consumer interface 내부에는 accept 와 andThen 이 구현되어 있었음
+ *                 그렇다면 Consumer 는 단일 추상 메소드를 구현하고 있는 인터페이스에 위배되지않나?
  *
  *             ! : 조사해본 결과, 함수형 인터페이스의 조건에 Default 메소드는 포함되지 않는다.
  *                 andThen 메소드는 두개의 Consumer 인터페이스를 사용하는데 도움을 주는
