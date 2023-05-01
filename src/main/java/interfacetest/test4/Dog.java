@@ -4,12 +4,12 @@ public class Dog implements Animal{
 
     @Override
     public void move() {
-        System.out.println(AnimalList.DOG + "->" + Action.MOVED.values());
+        System.out.println(AnimalList.DOG + "->" + Action.MOVED.toValueString());
     }
 
     @Override
     public void eat() {
-        System.out.println(AnimalList.DOG +"->"+ Action.EAT.values());
+        System.out.println(AnimalList.DOG +"->"+ Action.EAT.toValueString());
     }
 
     @Override
