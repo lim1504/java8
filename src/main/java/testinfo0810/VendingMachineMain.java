@@ -1,4 +1,4 @@
-package testinfo8010;
+package testinfo0810;
 
 public class VendingMachineMain {
     public static void main(String[] args) {

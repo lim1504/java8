@@ -1,4 +1,4 @@
-package testinfo8010;
+package testinfo0810;
 
 public class VendingMachine {
     // field 영역
