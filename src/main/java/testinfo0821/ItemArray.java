@@ -1,5 +1,6 @@
 package testinfo0821;
 
+
 public class ItemArray {
     private int price;
     private String name;
