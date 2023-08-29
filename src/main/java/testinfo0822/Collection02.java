@@ -15,9 +15,10 @@ public class Collection02 {
         Set<String> set = new HashSet<String>();
         set.add("a");
         set.add("b");
-        set.add("c");
-        set.add("c");
-
+        boolean a = set.add("c");
+        boolean b = set.add("c");
+        System.out.println("a: " + a);
+        System.out.println("b: " + b);
         Iterator<String> it = set.iterator();
 
         while (it.hasNext()) {
@@ -30,7 +31,7 @@ public class Collection02 {
         mySet.add(new MapData("lee", 1000));
         mySet.add(new MapData("goo", 5500));
         mySet.add(new MapData("koo", 700));
-        mySet.add(new MapData("koo", 800));
+        mySet.add(new MapData("koo", 700));
 
         Iterator<MapData> it2 = mySet.iterator();
 
