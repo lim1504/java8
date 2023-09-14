@@ -1,6 +1,8 @@
 package java0912;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * wait, notify 예제
@@ -8,6 +10,7 @@ import java.util.ArrayList;
  * @author cslim
  */
 public class ThreadWaitEx1 {
+
     public static void main(String[] args) throws Exception {
         Table table = new Table();
         new Thread (new Cook (table), "COOK1").start ();
@@ -62,34 +65,50 @@ class Cook implements Runnable {
 }
 
 class Table {
+    /**
+     * lock 요소 추가
+     */
+    private ReentrantLock lock = new ReentrantLock();
+    private Condition forCook = lock.newCondition();
+    private Condition forCust = lock.newCondition();
     String[] dishNames = {"donut", "donut", "burger"};
     final int MAX_FOOD = 6;
     private ArrayList<String> dishes = new ArrayList<String>();
 
     public synchronized void add(String dish) {
-        while (dishes.size() >= MAX_FOOD) {
-            String name = Thread.currentThread().getName();
-            System.out.println(name + " is waiting");
-            try {
-                wait();
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
+        lock.lock();
+        try {
+            while (dishes.size() >= MAX_FOOD) {
+                String name = Thread.currentThread().getName();
+                System.out.println(name + " is waiting");
+                try {
+//                wait();
+//                Thread.sleep(500);
+                    forCook.await(); // cook스레드는 기다리게한다.
+                } catch (InterruptedException e) {
+                }
             }
+            dishes.add(dish);
+            //notify();
+            forCust.signal(); // CUST 스레드를 깨운다.
+            System.out.println("Dishes : " + dishes.toString());
+        } finally {
+            lock.unlock();
         }
-        dishes.add(dish);
-        notify();
-        System.out.println("Dishes : " + dishes.toString());
+
     }
 
     public void remove(String dishName) {
-        synchronized (this) {
-            String name = Thread.currentThread().getName();
+        lock.lock();
+        String name = Thread.currentThread().getName();
 
+        try{
             while (dishes.size() == 0) {
                 System.out.println(name + " is waiting.");
                 try {
-                    wait();
-                    Thread.sleep(500);
+//                    wait();
+//                    Thread.sleep(500);
+                    forCust.await();
                 } catch (InterruptedException e) {
                 }
             }
@@ -98,17 +117,21 @@ class Table {
                 for (int i = 0; i < dishes.size(); i++) {
                     if (dishName.equals(dishes.get(i))) {
                         dishes.remove(i);
-                        notify();
+//                        notify();
+                        forCook.signal();
                         return;
                     }
                 }
                 try {
                     System.out.println(name + "is waiting.");
-                    wait();
-                    Thread.sleep(500);
+                    forCust.await();
+//                    wait();
+//                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
             }
+        } finally {
+            lock.unlock();
         }
     }
     public int disNum() {
