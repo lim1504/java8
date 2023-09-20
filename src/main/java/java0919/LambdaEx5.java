@@ -2,13 +2,19 @@ package java0919;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class LambdaEx5 {
     public static void main(String[] args) {
+
+        //메소드 참조
+        Function<String, Integer> f2 = (String s) -> Integer.parseInt(s);
+
+        Function<String, Integer> f3 = Integer::parseInt;
+
+        BiFunction<String, String, Boolean> b = (s1, s2) -> s1.equals(s2);
+
+        BiFunction<String, String, Boolean> b2 = String::equals;
 
         //함수형 인터페이스의 익명객체 선언
         Supplier<Integer> s = () -> (int) (Math.random() * 100) + 1;

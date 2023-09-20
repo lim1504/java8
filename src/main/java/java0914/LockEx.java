@@ -19,7 +19,6 @@ public class LockEx {
         long from = 1L, to = 100_000_000L; // 나눌 숫자의 범위 지정
 
         SumTask task = new SumTask(from , to); // 재귀함수 지정
-
         long start = System.currentTimeMillis();
         Long result = pool.invoke(task); // fork & join 프레임워크 실행 -> start
 

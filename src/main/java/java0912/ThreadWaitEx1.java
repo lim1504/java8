@@ -69,8 +69,8 @@ class Table {
      * lock 요소 추가
      */
     private ReentrantLock lock = new ReentrantLock();
-    private Condition forCook = lock.newCondition();
-    private Condition forCust = lock.newCondition();
+    private Condition forCook = lock.newCondition(); // 1
+    private Condition forCust = lock.newCondition(); // 2
     String[] dishNames = {"donut", "donut", "burger"};
     final int MAX_FOOD = 6;
     private ArrayList<String> dishes = new ArrayList<String>();
@@ -85,8 +85,7 @@ class Table {
 //                wait();
 //                Thread.sleep(500);
                     forCook.await(); // cook스레드는 기다리게한다.
-                } catch (InterruptedException e) {
-                }
+                } catch (InterruptedException e) {}
             }
             dishes.add(dish);
             //notify();
