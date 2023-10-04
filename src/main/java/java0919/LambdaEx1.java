@@ -1,5 +1,7 @@
 package java0919;
 
+import java.util.function.Function;
+
 @FunctionalInterface
 interface MyFunction {
     void run();
@@ -40,5 +42,9 @@ public class LambdaEx1 {
         MyFunction f4 = (MyFunction) (() -> {
         });
 //        Object o = (Object) (() -> {}); 형변환 불가
+
+
+        Function<String, Integer> fTest = Integer::parseInt;
+        fTest.apply("aa");
     }
 }
