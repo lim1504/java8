@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
+
 public class collectEx1 {
     public static void main(String[] args) {
         //1. 스트림을 만든다.
@@ -31,6 +33,7 @@ public class collectEx1 {
         Map<String, Student> map = stdStream2
                 .collect(Collectors.toMap(p -> p.getName(), p -> p));
 
+        String stdName = stdStream2.map(Student::getName).collect(joining(",", "[", "]"));
     }
 }
 
