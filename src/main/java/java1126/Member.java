@@ -7,6 +7,8 @@ public class Member implements Serializable {
     public String id;
     public int age;
 
+    public String national;
+
     public Member(String name, String id, int age) {
         this.name = name;
         this.id = id;
