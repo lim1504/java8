@@ -1,8 +1,8 @@
 package interfacetest;
 
-import interfacetest.test2.Person;
-import interfacetest.test3.IVCR;
-import interfacetest.test3.Tvcr;
+import java_09m.interfacetest.test2.Person;
+import java_09m.interfacetest.test3.IVCR;
+import java_09m.interfacetest.test3.Tvcr;
 
 public class Test2 {
     static Person person; //lazy initialization
